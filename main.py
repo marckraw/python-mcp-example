@@ -8,8 +8,17 @@ import os
 from datetime import datetime
 from mcp.server.fastmcp import FastMCP
 
+# Load environment variables from .env file (for local development)
+try:
+    from dotenv import load_dotenv
+    load_dotenv()  # This loads .env file automatically
+except ImportError:
+    # dotenv not installed, skip (production might not need it)
+    pass
+
 # Create FastMCP server using official SDK
-mcp = FastMCP("Simple Example Server")
+server_name = os.environ.get("SERVER_NAME", "Simple Example Server")
+mcp = FastMCP(server_name)
 
 # Add tools using the official SDK decorators
 @mcp.tool()
@@ -56,12 +65,10 @@ def server_info_resource() -> str:
     return "Simple MCP Server with Calculator, Echo, and Time tools"
 
 if __name__ == "__main__":
-    # Get port from Railway environment variable
-    port = int(os.environ.get("PORT", 8000))
+    # Set environment variables for FastMCP (it uses these internally)
+    port = int(os.environ.get("PORT", 12345))
+    os.environ.setdefault("HOST", "0.0.0.0")  # Bind to all interfaces for Railway
+    os.environ.setdefault("PORT", str(port))
     
-    # Run with SSE transport for Railway deployment
-    mcp.run(
-        transport="sse",
-        host="0.0.0.0",  # Important: bind to all interfaces for Railway
-        port=port
-    ) 
+    # Run with SSE transport - FastMCP handles host/port from environment
+    mcp.run(transport="sse") 
