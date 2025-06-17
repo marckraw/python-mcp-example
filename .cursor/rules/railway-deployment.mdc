@@ -1,0 +1,39 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Railway.app Deployment Guide
+
+## Environment Configuration
+- Use Railway's environment variables for production secrets
+- Set `PORT` environment variable (Railway provides this automatically)
+- Set `HOST=0.0.0.0` for external access
+- Configure `API_KEY` for authentication in production
+
+## Deployment Structure
+- Avoid `Procfile` and `railway.json` - Railway auto-detects Python apps
+- Use `requirements.txt` for dependencies
+- Keep dependencies minimal and focused
+- Core dependencies: `fastmcp`, `python-dotenv`
+
+## Server Configuration
+- Bind to `0.0.0.0` for external access
+- Use `PORT` environment variable from Railway
+- Support both authenticated and non-authenticated modes
+- Use SSE transport for web deployment
+
+## Best Practices
+- Test locally with `.env` file before deploying
+- Use `python-dotenv` for development environment management
+- Implement proper logging for production debugging
+- Design for production from the start
+- Consider scalability when choosing transport protocols
+
+## Common Environment Variables
+```
+PORT=8080                    # Provided by Railway
+HOST=0.0.0.0                # Required for external access
+API_KEY=your-secret-key     # Optional authentication
+SERVER_NAME=MyMCPServer     # Descriptive server name
+DEBUG=false                 # Disable debug in production

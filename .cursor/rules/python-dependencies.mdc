@@ -1,0 +1,39 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Python Dependency Management
+
+## Core Dependencies
+- Keep dependencies minimal and focused
+- FastMCP: `fastmcp` (primary framework)
+- Environment: `python-dotenv` for `.env` support
+- Add authentication libraries only when needed
+- Avoid unnecessary heavy dependencies
+
+## Environment Management
+- Use virtual environments for all projects: `python3 -m venv venv`
+- Install in virtual environments, not globally
+- Add to project configs, not one-off installs
+- Use `pip freeze > requirements.txt` to update dependencies
+
+## Requirements.txt Format
+```
+fastmcp>=2.0.0
+python-dotenv>=1.0.0
+# Add other dependencies as needed
+```
+
+## Development Dependencies
+- Consider separating dev dependencies if using pyproject.toml
+- Include testing frameworks when needed
+- Add linting tools for code quality
+- Use version pinning for production stability
+
+## Best Practices
+- Prefer project-level dependency management over individual package installation
+- Use `pip install -r requirements.txt` for installation
+- Consider using `pyproject.toml` with modern Python packaging
+- When adding dependencies, update the appropriate project configuration file
+- Regularly update dependencies for security patches

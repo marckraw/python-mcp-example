@@ -1,0 +1,34 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# FastMCP 2.0 Framework Standards
+
+## Primary Framework
+- Use FastMCP 2.0 as the primary framework for Model Context Protocol development
+- Documentation: https://gofastmcp.com/getting-started/welcome
+- FastMCP 2.0 is the actively maintained version with comprehensive production-ready features
+
+## Server Creation
+- Use `from fastmcp import FastMCP` for server creation
+- Prefer FastMCP 2.0 over the official MCP SDK for new projects
+- FastMCP provides simpler, more Pythonic interfaces
+
+## Tools and Resources
+- Use `@mcp.tool` decorator for creating tools (LLM actions/POST-like operations)
+- Use `@mcp.resource("uri")` decorator for creating resources (LLM context/GET-like operations)
+- Tools should perform actions and have side effects
+- Resources should provide static/reference data for LLM context
+
+## Transport Protocols
+- Prefer SSE (Server-Sent Events) transport for web deployments
+- Use `mcp.run(transport="sse")` for SSE mode
+- Use `mcp.run(transport="streamable-http")` for HTTP streaming when appropriate
+- Use `mcp.run()` or `mcp.run(transport="stdio")` for local/stdio mode
+
+## Code Style
+- Follow Pythonic conventions and clean code principles
+- Use type hints for function parameters and return types
+- Include descriptive docstrings for all tools and resources
+- Prefer simple, readable implementations over complex ones

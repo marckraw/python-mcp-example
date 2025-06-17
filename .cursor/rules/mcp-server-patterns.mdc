@@ -1,0 +1,35 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# MCP Server Development Patterns
+
+## Server Structure
+- `main.py` as primary server entry point
+- Use `FastMCP(name)` constructor with descriptive server names
+- Support environment-based configuration
+
+## Environment Variables
+- Use `python-dotenv` for local development environment management
+- Support `.env` files for local configuration
+- Use `os.environ.get()` with sensible defaults
+- Common vars: `PORT`, `HOST`, `API_KEY`, `SERVER_NAME`, `DEBUG`
+
+## Authentication
+- Implement simple API key authentication when needed
+- Use environment variables for API keys (`API_KEY`)
+- Support both `Authorization: Bearer <key>` and `X-API-Key: <key>` headers
+- Make authentication optional for development
+
+## Error Handling
+- Implement proper error handling in tools
+- Return user-friendly error messages
+- Use try-except blocks for external API calls and file operations
+- Log errors appropriately without exposing sensitive information
+
+## Deployment Ready
+- Structure code for Railway.app deployment by default
+- Use `host="0.0.0.0"` and `PORT` environment variable for production
+- Include proper requirements.txt with minimal dependencies
+- Support both authenticated and non-authenticated modes
